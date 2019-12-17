@@ -36,6 +36,13 @@
     font-weight: bold;
     margin-bottom: 10px;
   }
+  .banner-row {
+    display: flex;
+    align-items: center;
+  }
+  .banner-col {
+    margin-right: 24px;
+  }
   .banner {
     border-radius: 8px;
     width: 462px;
@@ -43,6 +50,9 @@
     background-color: #F3C189;
     color: white;
     position: relative;
+  }
+  .banner--purple {
+    background-color: #5161CE;
   }
   .banner-title {
     font-size: 26px;
@@ -59,6 +69,47 @@
     margin-top: 40px;
     font-weight: bold;
   }
+  .banner-icon {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+  }
+  .record {
+    padding: 40px 16px;
+  }
+  .best-card {
+    border-radius: 8px;
+    background-color: #5161CE;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  .best-card-title {
+    font-weight: bold;
+    color: white;
+    margin-bottom: 16px;
+  }
+  .best-card-score {
+    text-align: center;
+    color: #FFE463;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .archivement-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .archivement-icon {
+    margin-right: 8px;
+  }
+  .archivement-title {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+  .archivement-description {
+    font-size: 12px;
+  }
 </style>
 
 <template lang="pug">
@@ -74,6 +125,16 @@
               우리 아이의 발달을
               기록해보세요.
             .banner-link VIEW DETAIL
+            img.banner-icon(src="~/assets/007-clock.png")
+        .banner-col
+          .title Banner
+          .banner.banner--purple
+            .banner-title 측정해보세요!
+            .banner-description.
+              우리 아이의 발달을
+              기록해보세요.
+            .banner-link VIEW DETAIL
+            img.banner-icon(src="~/assets/007-clock.png")
       .chart
         .title Chart
         .line-chart-container
@@ -82,12 +143,17 @@
             :width="600",
             :height="300")
     .record
+      .title Best
       .best-card
-        .best-title
-        .best-score
-      .title Archivement
+        .best-card-title Best record
+        .best-card-score {{ bestRank.score | number }}
+      .title Archivements
       ul.archivement-list
-        li.archivement-item asd
+        li.archivement-item(v-for="(item, key) in bestRank.archivements")
+          img.archivement-icon(src="~/assets/medal.png")
+          .archivement-content
+            .archivement-title {{ item.name }}
+            .archivement-description {{ item.description }}
 </template>
 
 <script>
@@ -154,7 +220,7 @@ export default {
         if (aScore > bScore) return -1;
         if (aScore < bScore) return 1;
         return 0;
-      })[0];
+      })[0] || {};
     },
     chartData() {
       const data = this.bestRanksSplitByDate.map(item => {
@@ -183,6 +249,13 @@ export default {
         console.error(e);
         throw e;
       }
+    },
+  },
+  filters: {
+    number(val) {
+      if (!val) return val;
+      if (!val.toLocaleString) return val;
+      return val.toLocaleString();
     },
   },
   mounted() {
