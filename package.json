@@ -1,0 +1,36 @@
+{
+  "name": "project-mission-of-kids-web",
+  "version": "1.0.0",
+  "description": "2019년 2학년 2학기 IoT 임베디드 프로그래밍 과제",
+  "author": "박찬영 &lt;rhdwkrxla68@gmail.com&gt;",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.3.6",
+    "chart.js": "^2.9.3",
+    "element-ui": "^2.4.11",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
+    "moment": "^2.24.0",
+    "nuxt": "^2.0.0",
+    "pug": "^2.0.4",
+    "pug-plain-loader": "^1.0.0",
+    "vue": "^2.6.11",
+    "vue-chartjs": "^3.5.0",
+    "vuex": "^3.1.2"
+  },
+  "devDependencies": {
+    "@nuxtjs/eslint-config": "^1.0.1",
+    "@nuxtjs/eslint-module": "^1.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^6.1.0",
+    "eslint-plugin-nuxt": ">=0.4.2"
+  }
+}
